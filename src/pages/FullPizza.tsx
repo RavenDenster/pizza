@@ -22,6 +22,7 @@ const FullPizza: React.FC = () => {
     async function fetchPizza() {
         try {
         const { data } = await axios.get('https://63286fab9a053ff9aab7e0f2.mockapi.io/items/' + id)
+        console.log(data)
         setPizza(data)
         } catch (error) {
             navigate('/')
@@ -47,7 +48,7 @@ const FullPizza: React.FC = () => {
             )}
         </div>
       </div>
-      <Link to='/ppppppp'>
+      <Link to='/'>
         <button className="button button--outline button--add">           
           <span>Назад</span>
         </button>

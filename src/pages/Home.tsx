@@ -45,7 +45,7 @@ const Home: React.FC = () => {
     const getPizzas = async () => { // добовля асин.авейт все действия внутри в том числе и асинхроные выполняются по порядку
       const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
       const sortBy = sort.sortProperty.replace('-', '') 
-      const category = categoryId > 0 ? `category=${categoryId}` : ''
+      const category = categoryId ? `category=${categoryId}` : ''
       const search = searchValue ? `&search=${searchValue}` : ''
       // fetch(`https://63286fab9a053ff9aab7e0f2.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
       // )
@@ -87,7 +87,7 @@ const Home: React.FC = () => {
       if(isMounted.current) {
         const queryString = qs.stringify({
           sortProperty: sort.sortProperty,
-          categoryId: categoryId > 0 ? categoryId : 0,
+          categoryId,
           currentPage,
         })
         console.log(queryString)
@@ -121,11 +121,7 @@ const Home: React.FC = () => {
 
     React.useEffect(() => {
       window.scrollTo(0, 0)
-      if(!isSearch.current) {
-        getPizzas()
-      }
-
-      isSearch.current = false
+      getPizzas()
 
     }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
